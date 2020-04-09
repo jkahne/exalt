@@ -6,9 +6,9 @@ defmodule Exalt.BrainTest do
   describe "notes" do
     alias Exalt.Brain.Note
 
-    @valid_attrs %{note: "some note", sort_order: 42}
-    @update_attrs %{note: "some updated note", sort_order: 43}
-    @invalid_attrs %{note: nil, sort_order: nil}
+    @valid_attrs %{title: "title 1", content: "some note", sort_order: 42}
+    @update_attrs %{title: "title 2", content: "some updated note", sort_order: 43}
+    @invalid_attrs %{title: nil, content: nil, sort_order: nil}
 
     def note_fixture(attrs \\ %{}) do
       {:ok, note} =
@@ -31,7 +31,7 @@ defmodule Exalt.BrainTest do
 
     test "create_note/1 with valid data creates a note" do
       assert {:ok, %Note{} = note} = Brain.create_note(@valid_attrs)
-      assert note.note == "some note"
+      assert note.content == "some note"
       assert note.sort_order == 42
     end
 
@@ -42,7 +42,7 @@ defmodule Exalt.BrainTest do
     test "update_note/2 with valid data updates the note" do
       note = note_fixture()
       assert {:ok, %Note{} = note} = Brain.update_note(note, @update_attrs)
-      assert note.note == "some updated note"
+      assert note.content == "some updated note"
       assert note.sort_order == 43
     end
 

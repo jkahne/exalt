@@ -4,6 +4,10 @@ defmodule ExaltWeb.HomeController do
   alias Exalt.Brain
   alias Exalt.Brain.Note
 
+
+  alias ExaltWeb.HomeLive
+
+
   def create(conn, %{"note" => note_params}) do
     # case Brain.create_note(note_params) do
     #   {:ok, note} ->
@@ -17,8 +21,8 @@ defmodule ExaltWeb.HomeController do
   end
 
   def show(conn, _params) do
-    notes = Brain.list_notes()
-    render(conn, "show.html", notes: notes)
+    all_notes = Brain.list_notes()
+    live_render(conn, HomeLive, session: %{"all_notes" => all_notes, "title" => ""})
   end
 
   def update(conn, %{"id" => id, "note" => note_params}) do

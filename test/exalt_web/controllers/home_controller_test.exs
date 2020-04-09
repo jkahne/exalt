@@ -1,16 +1,28 @@
-defmodule ExaltWeb.NoteControllerTest do
+defmodule ExaltWeb.HomeControllerTest do
   use ExaltWeb.ConnCase
-
   alias Exalt.Brain
 
-  @create_attrs %{note: "some note", sort_order: 42}
-  @update_attrs %{note: "some updated note", sort_order: 43}
-  @invalid_attrs %{note: nil, sort_order: nil}
+  @valid_attrs %{title: "title", content: "some note", sort_order: 42}
 
-  def fixture(:note) do
-    {:ok, note} = Brain.create_note(@create_attrs)
+  def fixture(:note, attr \\ %{}) do
+    {:ok, note} = 
+      attr
+      |> Enum.into(@valid_attrs)
+      |> Brain.create_note()
     note
   end
+
+  describe "home show" do
+    test "all notes show on page", %{conn: conn} do
+      fixture(:note, %{title: "title 1", content: "some note"} )
+      fixture(:note, %{title: "title 2", content: "another note"} )
+
+      conn = get(conn, Routes.home_path(conn, :show))
+      assert html_response(conn, 200) =~ "title 1"
+      assert html_response(conn, 200) =~ "title 2"
+    end
+  end
+
 
   # describe "index" do
   #   test "lists all notes", %{conn: conn} do
@@ -85,4 +97,5 @@ defmodule ExaltWeb.NoteControllerTest do
     note = fixture(:note)
     {:ok, note: note}
   end
+
 end

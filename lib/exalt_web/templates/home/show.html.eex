@@ -1,8 +1,0 @@
-<input type='text' />
-
-<%= for note <- @notes do %>
-  <div>
-    <%= note.note %>
-  </div> 
-<% end %>
-

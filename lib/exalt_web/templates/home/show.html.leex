@@ -1,0 +1,15 @@
+<%= form_tag "#", [phx_change: "search", phx_submit: "create"] do %>
+  <%= text_input :title, :title, value: @title, autocomplete: "off" %>
+<% end %>
+
+<%= for note <- @notes do %>
+  <div phx-click="click_note" phx-value-note_title="<%= note.title %>" id="<%= note.title %>">
+    <%= note.title %>
+  </div> 
+<% end %>
+
+<%= if @note do %>
+  <div id="note_content">
+   <%= @note.content %>
+  </div>
+<% end %>

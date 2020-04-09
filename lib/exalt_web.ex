@@ -23,6 +23,7 @@ defmodule ExaltWeb do
 
       import Plug.Conn
       import ExaltWeb.Gettext
+      import Phoenix.LiveView.Controller
       alias ExaltWeb.Router.Helpers, as: Routes
     end
   end
@@ -41,6 +42,7 @@ defmodule ExaltWeb do
 
       import ExaltWeb.ErrorHelpers
       import ExaltWeb.Gettext
+      import Phoenix.LiveView.Helpers
       alias ExaltWeb.Router.Helpers, as: Routes
     end
   end
@@ -50,6 +52,7 @@ defmodule ExaltWeb do
       use Phoenix.Router
       import Plug.Conn
       import Phoenix.Controller
+      import Phoenix.LiveView.Router
     end
   end
 

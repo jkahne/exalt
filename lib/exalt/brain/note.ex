@@ -3,7 +3,8 @@ defmodule Exalt.Brain.Note do
   import Ecto.Changeset
 
   schema "notes" do
-    field :note, :string
+    field :title, :string
+    field :content, :string
     field :sort_order, :integer
 
     timestamps()
@@ -12,7 +13,7 @@ defmodule Exalt.Brain.Note do
   @doc false
   def changeset(note, attrs) do
     note
-    |> cast(attrs, [:note, :sort_order])
-    |> validate_required([:note, :sort_order])
+    |> cast(attrs, [:title, :content, :sort_order])
+    |> validate_required([:title])
   end
 end
